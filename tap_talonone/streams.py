@@ -60,7 +60,7 @@ class AccountsStream(TalonOneStream):
 class AccountAnalyticsStream(TalonOneStream):
     name = "account_analytics"
     path = "/v1/accounts/{account_id}/analytics"
-    primary_keys = ["id"]
+    primary_keys = ["account_id"]
     replication_key = None
     records_jsonpath = "$"
     schema = th.PropertiesList(
