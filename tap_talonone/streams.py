@@ -86,6 +86,10 @@ class AccountAnalyticsStream(TalonOneStream):
         th.Property("liveLoyaltyPrograms", th.IntegerType),
     ).to_dict()
 
+    def post_process(self, row: dict, context: Optional[dict] = None) -> Optional[dict]:
+        row["account_id"] = context["account_id"]
+        return row
+
 
 class ApplicationsStream(TalonOneStream):
     name = "applications"
