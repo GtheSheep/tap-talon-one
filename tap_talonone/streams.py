@@ -87,7 +87,7 @@ class AccountAnalyticsStream(TalonOneStream):
     ).to_dict()
 
     def post_process(self, row: dict, context: Optional[dict] = None) -> Optional[dict]:
-        row["account_id"] = context["account_id"]
+        row["account_id"] = self.config["account_id"]
         return row
 
 
