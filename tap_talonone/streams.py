@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Any, Optional, Iterable
 
 from singer_sdk import typing as th  # JSON Schema typing helpers
+from singer_sdk.helpers._typing import TypeConformanceLevel
 
 from tap_talonone.client import TalonOneStream
 
@@ -96,6 +97,7 @@ class ApplicationsStream(TalonOneStream):
     path = "/v1/applications"
     primary_keys = ["id"]
     replication_key = None
+    TYPE_CONFORMANCE_LEVEL = TypeConformanceLevel.ROOT_ONLY
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
         th.Property("created", th.DateTimeType),
@@ -156,6 +158,7 @@ class CampaignsStream(TalonOneStream):
     replication_key = None
     parent_stream_type = ApplicationsStream
     ignore_parent_replication_keys = True
+    TYPE_CONFORMANCE_LEVEL = TypeConformanceLevel.ROOT_ONLY
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
         th.Property("created", th.DateTimeType),
@@ -208,6 +211,7 @@ class CouponsStream(TalonOneStream):
     replication_key = None
     parent_stream_type = CampaignsStream
     ignore_parent_replication_keys = True
+    TYPE_CONFORMANCE_LEVEL = TypeConformanceLevel.ROOT_ONLY
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
         th.Property("created", th.DateTimeType),
@@ -243,6 +247,7 @@ class ChangesStream(TalonOneStream):
     path = "/v1/changes"
     primary_keys = ["id"]
     replication_key = "created"
+    TYPE_CONFORMANCE_LEVEL = TypeConformanceLevel.ROOT_ONLY
     schema = th.PropertiesList(
         th.Property("id", th.IntegerType),
         th.Property("created", th.DateTimeType),
