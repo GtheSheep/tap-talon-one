@@ -11,7 +11,7 @@ from tap_talonone import streams
 class TapTalonOne(Tap):
     """TalonOne tap class."""
 
-    name = "tap-talonone"
+    name = "tap-talon-one"
 
     config_jsonschema = th.PropertiesList(
         th.Property(

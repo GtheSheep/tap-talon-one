@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "GtheSheep-tap-talonone"
+name = "GtheSheep-tap-talon-one"
 version = "0.0.1"
-description = "`tap-talonone` is a Singer tap for TalonOne, built with the Meltano Singer SDK."
+description = "`tap-talon-one` is a Singer tap for TalonOne, built with the Meltano Singer SDK."
 readme = "README.md"
 authors = ["Gary James"]
 keywords = [
@@ -55,4 +55,4 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 # CLI declaration
-tap-talonone = 'tap_talonone.tap:TapTalonOne.cli'
+tap-talon-one = 'tap_talonone.tap:TapTalonOne.cli'
