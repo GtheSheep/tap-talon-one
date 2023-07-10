@@ -285,9 +285,9 @@ class AdditionalCostsStream(TalonOneStream)
         th.Property("id", th.IntegerType),
         th.Property("created", th.DateTimeType),
         th.Property("accountId", th.IntegerType),
-        th.Property("name", th.StringTyp),
-        th.Property("title", th.StringTyp),
+        th.Property("name", th.StringType),
+        th.Property("title", th.StringType),
         th.Property("description", th.StringType),
         th.Property("subscribedApplicationsIds", th.ArrayType(th.IntegerType)),
-        th.Property("type", th.StringTyp()),
+        th.Property("type", th.StringType),
     ).to_dict()
