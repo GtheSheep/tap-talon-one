@@ -54,6 +54,7 @@ class TapTalonOne(Tap):
             streams.CampaignsStream(self),
             streams.CouponsStream(self),
             streams.ChangesStream(self),
+            streams.AdditionalCostsStream(self),
         ]
 
 

@@ -274,3 +274,20 @@ class ChangesStream(TalonOneStream):
             start_date_formatted = start_date.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
             params["createdAfter"] = start_date_formatted
         return params
+
+class AdditionalCostsStream(TalonOneStream)
+    name = "additional_costs"
+    path = "/v1/additional_costs"
+    primary_keys = ["id"]
+    replication_key = "created"
+    TYPE_CONFORMANCE_LEVEL = TypeConformanceLevel.ROOT_ONLY
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("created", th.DateTimeType),
+        th.Property("accountId", th.IntegerType),
+        th.Property("name", th.StringTyp),
+        th.Property("title", th.StringTyp),
+        th.Property("description", th.StringType),
+        th.Property("subscribedApplicationsIds", th.ArrayType(th.IntegerType)),
+        th.Property("type", th.StringTyp()),
+    ).to_dict()
