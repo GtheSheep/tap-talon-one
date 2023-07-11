@@ -275,7 +275,7 @@ class ChangesStream(TalonOneStream):
             params["createdAfter"] = start_date_formatted
         return params
 
-class AdditionalCostsStream(TalonOneStream)
+class AdditionalCostsStream(TalonOneStream):
     name = "additional_costs"
     path = "/v1/additional_costs"
     primary_keys = ["id"]
