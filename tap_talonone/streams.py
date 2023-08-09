@@ -304,7 +304,7 @@ class ReferralsStream(TalonOneStream):
         th.Property("id", th.IntegerType),
         th.Property("created", th.DateTimeType),
         th.Property("startDate", th.DateTimeType),
-        th.Property("expirtDate", th.DateTimeType),
+        th.Property("expiryDate", th.DateTimeType),
         th.Property("usageLimit", th.IntegerType),
         th.Property("campaignId", th.IntegerType),
         th.Property("advocateProfileIntegrationId", th.StringType),
