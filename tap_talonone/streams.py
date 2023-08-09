@@ -291,3 +291,51 @@ class AdditionalCostsStream(TalonOneStream):
         th.Property("subscribedApplicationsIds", th.ArrayType(th.IntegerType)),
         th.Property("type", th.StringType),
     ).to_dict()
+
+class ReferralsStream(TalonOneStream):
+    name = "referrals"
+    path = "/v1/applications/{application_id}/campaigns/{campaign_id}/referrals/no_total"
+    primary_keys = ["id"]
+    replication_key = "created"
+    parent_stream_type = CampaignsStream
+    ignore_parent_replication_keys = True
+    TYPE_CONFORMANCE_LEVEL = TypeConformanceLevel.ROOT_ONLY
+    schema = th.PropertiesList(
+        th.Property("id", th.IntegerType),
+        th.Property("created", th.DateTimeType),
+        th.Property("startDate", th.DateTimeType),
+        th.Property("expirtDate", th.DateTimeType),
+        th.Property("usageLimit", th.IntegerType),
+        th.Property("campaignId", th.IntegerType),
+        th.Property("advocateProfileIntegrationId", th.StringType),
+        th.Property("friendProfileIntegrationId", th.StringType),
+        th.Property("attributes", th.ArrayType(th.StringType)),
+        th.Property("importId", th.IntegerType),
+        th.Property("code", th.StringType),
+        th.Property("usageCounter", th.IntegerType),
+        th.Property("batchId", th.StringType),
+    ).to_dict()
+
+    def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
+        """Return a context dictionary for child streams."""
+        return {
+            "application_id": context["application_id"],
+            "integration_id": record["advocateProfileIntegrationId"]
+        }
+
+class FriendsStream(TalonOneStream):
+    name = "friends"
+    path = "/v1/applications/{application_id}/profile/{integration_id}/friends"
+    primary_keys = ["sessionId"]
+    replication_key = "created"
+    parent_stream_type = ReferralsStream
+    ignore_parent_replication_keys = True
+    TYPE_CONFORMANCE_LEVEL = TypeConformanceLevel.ROOT_ONLY
+    schema = th.PropertiesList(
+        th.Property("applicationId", th.IntegerType),
+        th.Property("sessionId", th.StringType),
+        th.Property("advocateIntegrationId", th.StringType),
+        th.Property("friendIntegrationId", th.StringType),
+        th.Property("code", th.StringType),
+        th.Property("created", th.DateTimeType),
+    ).to_dict()
