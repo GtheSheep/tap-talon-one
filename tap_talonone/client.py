@@ -54,7 +54,7 @@ class TalonOneStream(RESTStream):
         return headers
 
     def get_new_paginator(self) -> BaseOffsetPaginator:
-        return Paginator(start_value=0, page_size=10000)
+        return Paginator(start_value=0, page_size=self.config["page_size"])
 
     def get_url_params(
         self,
@@ -63,7 +63,7 @@ class TalonOneStream(RESTStream):
     ) -> dict[str, Any]:
         params: dict = {
             "skip": 0,
-            "pageSize": 10000
+            "pageSize": self.config["page_size"]
         }
         if next_page_token:
             params["skip"] = next_page_token
