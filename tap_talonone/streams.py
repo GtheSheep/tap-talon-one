@@ -296,7 +296,7 @@ class ReferralsStream(TalonOneStream):
     name = "referrals"
     path = "/v1/applications/{application_id}/campaigns/{campaign_id}/referrals/no_total"
     primary_keys = ["id"]
-    replication_key = "created"
+    replication_key = None
     parent_stream_type = CampaignsStream
     ignore_parent_replication_keys = True
     TYPE_CONFORMANCE_LEVEL = TypeConformanceLevel.ROOT_ONLY
