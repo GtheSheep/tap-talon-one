@@ -63,6 +63,7 @@ class TalonOneStream(RESTStream):
     ) -> dict[str, Any]:
         params: dict = {
             "skip": 0,
+            "pageSize": 10000
         }
         if next_page_token:
             params["skip"] = next_page_token
