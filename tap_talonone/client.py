@@ -8,7 +8,7 @@ from typing import Any, Callable, Iterable
 import requests
 from singer_sdk.authenticators import APIKeyAuthenticator
 from singer_sdk.helpers.jsonpath import extract_jsonpath
-from singer_sdk.pagination import BaseAPIPaginator  # noqa: TCH002
+from singer_sdk.pagination import BaseOffsetPaginator  # noqa: TCH002
 from singer_sdk.streams import RESTStream
 
 from tap_talonone.pagination import Paginator
@@ -53,7 +53,7 @@ class TalonOneStream(RESTStream):
         headers = {}
         return headers
 
-    def get_new_paginator(self) -> BaseAPIPaginator:
+    def get_new_paginator(self) -> BaseOffsetPaginator:
         return Paginator(start_value=0, page_size=5)
 
     def get_url_params(
@@ -62,7 +62,7 @@ class TalonOneStream(RESTStream):
         next_page_token: Any | None,
     ) -> dict[str, Any]:
         params: dict = {
-            "skip": 0
+            "skip": 0,
         }
         if next_page_token:
             params["skip"] = next_page_token
