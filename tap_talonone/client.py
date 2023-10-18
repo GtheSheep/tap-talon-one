@@ -54,7 +54,7 @@ class TalonOneStream(RESTStream):
         return headers
 
     def get_new_paginator(self) -> BaseOffsetPaginator:
-        return Paginator(start_value=0, page_size=5)
+        return Paginator(start_value=0, page_size=10000)
 
     def get_url_params(
         self,
