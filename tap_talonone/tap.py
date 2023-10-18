@@ -38,6 +38,13 @@ class TapTalonOne(Tap):
             required=True,
             description="The ID for your account",
         ),
+        th.Property(
+            "page_size",
+            th.IntegerType,
+            required=False,
+            default=10000,
+            description="Page size for pagination",
+        ),
     ).to_dict()
 
     def discover_streams(self) -> list[streams.TalonOneStream]:
